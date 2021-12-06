@@ -1,0 +1,55 @@
+html{
+    height: 100%;
+}
+
+body
+{
+    background-color: #F7F4F4;
+    padding-top: 40px;
+    padding-bottom: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin:auto;
+    min-height: 100%;
+}
+
+.title
+{
+    font-size: 2rem;
+    text-align: center;
+}
+
+.columna
+{
+    max-width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 2em;
+}
+
+.col-sup
+{
+    margin-top: 2em;
+}
+
+.col-inf
+{
+    margin-top: 2em;
+}
+
+img{
+    max-width: 50%;
+}
+
+.form-singin
+{
+    background-color: #caf0f8;
+    border-radius: 25px;
+    max-width: 75%;
+    min-width: 50%;
+    border-color: black ;
+}
+
+
