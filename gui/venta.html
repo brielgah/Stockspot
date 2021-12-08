@@ -6,12 +6,12 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'">
   <link rel="stylesheet" href="css/bootstrap.min.css">
-  <link rel="stylesheet" href="css/proveedores.css">
+  <link rel="stylesheet" href="css/venta.css">
   <link rel="stylesheet" href="css/all.min.css">
   <script src="js/bootstrap.min.js"></script>
   <script src="js/bootstrap.js.map"></script>
   <script src="js/bootstrap.bundle.js"></script>
-  <title>Proveedores</title>
+  <title>Venta</title>
 </head>
 
 <body>
@@ -22,8 +22,8 @@
         <img class="navbar-brand logo" src="imagenes/logo.png">
       </div>
       <div class="col3">
-        <img class="usuario" src="imagenes/proveedor.png">
-        <h2>Proveedores</h2>
+        <img class="usuario" src="imagenes/venta.png">
+        <h2>Venta</h2>
       </div>
       <div class="col1 d-flex justify-content-center">
         <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#menu"
@@ -47,9 +47,9 @@
               <thead>
                 <tr>    
                   <th scope="col"></th>
-                  <th scope="col">Compañia</th>
-                  <th scope="col">Nombre</th>
-                  <th scope="col">Número</th>
+                  <th scope="col">Producto</th>
+                  <th scope="col">Cantidad</th>
+                  <th scope="col">Subtotal</th>
                 </tr>
               </thead>
               <tbody>
@@ -59,9 +59,9 @@
                       <i class="fas fa-times"></i>
                     </button>
                   </th>
-                  <th scope="row">1</th>
-                  <td>Mark</td>
-                  <td>Otto</td>
+                  <th scope="row">Leche Santa Clara 1 lt</th>
+                  <td>3</td>
+                  <td>$72.00</td>
                 </tr>
                 <tr>
                   <th>
@@ -69,9 +69,9 @@
                       <i class="fas fa-times"></i>
                     </button>
                   </th>
-                  <th scope="row">2</th>
-                  <td>Jacob</td>
-                  <td>Thornton</td>
+                  <th scope="row">Atun Dolores en agua 330gr</th>
+                  <td>2</td>
+                  <td>$60.00</td>
                 </tr>
                 <tr>
                   <th>
@@ -79,9 +79,9 @@
                       <i class="fas fa-times"></i>
                     </button>
                   </th>
-                  <th scope="row">3</th>
-                  <td>Larry</td>
-                  <td>the Bird</td>
+                  <th scope="row">Queso oaxaca La Villita 500gr</th>
+                  <td>1</td>
+                  <td>$85.00</td>
                 </tr>
                 <tr>
                   <th>
@@ -89,9 +89,9 @@
                       <i class="fas fa-times"></i>
                     </button>
                   </th>
-                  <th scope="row">3</th>
-                  <td>Larry</td>
-                  <td>the Bird</td>
+                  <th scope="row">Cerveza Stella Artois 255ml six</th>
+                  <td>1</td>
+                  <td>$120.00</td>
                 </tr>
                 <tr>
                   <th>
@@ -99,9 +99,9 @@
                       <i class="fas fa-times"></i>
                     </button>
                   </th>
-                  <th scope="row">3</th>
-                  <td>Larry</td>
-                  <td>the Bird</td>
+                  <th scope="row">Atun Dolores en agua 330gr</th>
+                  <td>2</td>
+                  <td>$60.00</td>
                 </tr>
                 <tr>
                   <th>
@@ -109,28 +109,33 @@
                       <i class="fas fa-times"></i>
                     </button>
                   </th>
-                  <th scope="row">3</th>
-                  <td>Larry</td>
-                  <td>the Bird</td>
+                  <th scope="row">Cerveza Stella Artois 255ml six</th>
+                  <td>1</td>
+                  <td>$120.00</td>
                 </tr>
               </tbody>
           </table>
         </div>
       </div>
+      <div class="row d-flex justify-content-center">
+          <div class="col d-flex justify-content-end">
+            <span class="texto">Total: $517.00</span>
+          </div>
+      </div>
       <div class="row justify-content-between gap-2 mt-4">
         <div class="col d-flex justify-content-center">
           <button class="btn btn-primary boton" type="button">
-            <span class="texto">Ingresar</span>
+            <span class="texto">Eliminar</span>
           </button>
         </div>
         <div class="col d-flex justify-content-center">
           <button type="button" class="btn btn-primary boton">
-            <span class="texto">Modificar</span>
+            <span class="texto">Agregar</span>
           </button>
         </div>
         <div class="col d-flex justify-content-center">
           <button type="button" class="btn btn-primary boton ">
-            <span class="texto">Eliminar</span>
+            <span class="texto">Realizar Venta</span>
           </button>
         </div>
       </div>
