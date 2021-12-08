@@ -1,5 +1,5 @@
 {
-  "name": "StockSpot",
+  "name": "stockspot",
   "version": "1.0.0",
   "description": "aplicacion crud",
   "main": "server.js",
@@ -7,8 +7,8 @@
     "start": "electron ."
   },
   "keywords": [],
-  "author": "",
-  "license": "",
+  "author": "Equipo1",
+  "license": "ISC",
   "dependencies": {
     "animate.css": "^4.1.1",
     "electron": "^8.5.5",
@@ -16,5 +16,13 @@
     "promise-mysql": "^4.1.4",
     "sweetalert": "^2.1.2",
     "sweetalert2": "^11.1.9"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/brielgah/Stockspot.git"
+  },
+  "bugs": {
+    "url": "https://github.com/brielgah/Stockspot/issues"
+  },
+  "homepage": "https://github.com/brielgah/Stockspot#readme"
 }

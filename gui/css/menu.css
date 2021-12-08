@@ -1,0 +1,136 @@
+html{
+    height: calc(100%) !important;
+    max-width: 100% !important;
+}
+
+.row
+{
+    margin: 0;
+}
+
+h1{
+    word-wrap: break-word;
+}
+
+.max-alto
+{
+    height: 450px;
+}
+
+body
+{
+    max-height: 100%;
+    height: calc(100% - 100px);
+    /* display: flex;
+    flex-direction: column; */
+    font-size: 16px;
+    max-width: 100%;
+    margin-top: 100px;
+    /* background-color: rgb(37, 169, 173); */
+}
+
+.navbar-toggler
+{
+    max-width: 100%;
+}
+
+.logo
+{
+    max-width: 100%;
+    min-width: 8%;
+}
+
+.menu
+{
+    width: 100%;
+} 
+
+.usuario
+{
+    width: 8%;
+}
+
+.usuarioBtn
+{
+    width: 75px;
+}
+
+.columna
+{
+    display: flex;
+    align-items: center;
+    min-width: 100%;
+    height: 100%;
+}
+
+.alto
+{
+    max-height: 100%;
+}
+
+.container
+{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin: auto;
+    /* padding-top: 100px; */
+}   
+
+/* .contenedor
+{
+    min-height: calc(100% - 0px);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    max-width: 100%;
+    margin: auto; 
+    padding-top: 100px;
+}    */
+
+.boton
+{
+    max-width: 100%;
+}
+
+h2{
+    font-size: 2.5vw;
+}
+
+.col1
+{
+    width: 15%;
+    max-width: 15%;
+}
+
+.col3
+{
+    display: flex;
+    align-items: center;
+    width: 70%;
+    justify-content: center;
+}
+
+.offcanvas
+{
+    max-width: 40%;
+}
+
+.container
+{
+    border-radius: 25px;
+    margin: 0 auto;
+    padding: 0;
+    min-height: 100%;
+}
+
+.table-wrapper {
+    max-height: 300px;
+    overflow: auto;
+    display:inline-block;
+}
+
+.texto
+{
+    font-size: 1.5rem;
+}
