@@ -15,7 +15,7 @@ winlogin = new BrowserWindow({
     center: true,
     backgroundColor: '#fff', 
     title: 'Run Mountain', 
-    resizable: false,
+    resizable: true,
     maximizable: false,
     //autoHideMenuBar: true,
     transparent: true,
@@ -38,7 +38,7 @@ function createWindow(){
         center: true,
         backgroundColor: '#000', 
         title: 'StockSpot', 
-        resizable: false,
+        resizable: true,
         maximizable: false,
         //autoHideMenuBar: true,
         transparent: true,
@@ -59,7 +59,7 @@ function createWindowInv(){
         center: true,
         backgroundColor: '#000', 
         title: 'Inventario', 
-        resizable: false,
+        resizable: true,
         maximizable: false,
         //autoHideMenuBar: true,
         transparent: true,
@@ -79,7 +79,7 @@ function createWindowUsr(){
         show: false,
         backgroundColor: '#000', 
         title: 'Inventario', 
-        resizable: false,
+        resizable: true,
         maximizable: false,
         //autoHideMenuBar: true,
         transparent: true,
@@ -89,6 +89,44 @@ function createWindowUsr(){
         }
     })
     window.loadFile('./gui/usuarios.html');
+}
+
+function createWindowMenu(){
+    window = new BrowserWindow({
+        width: 1000,
+        height: 700,
+        center: true,
+        backgroundColor: '#000', 
+        title: 'Inventario', 
+        resizable: true,
+        maximizable: false,
+        //autoHideMenuBar: true,
+        transparent: true,
+        movable: true,
+        webPreferences:{
+        nodeIntegration: true
+        }
+    })
+    window.loadFile('./gui/menu.html');
+}
+
+function createWindowProv(){
+    window = new BrowserWindow({
+        width: 1000,
+        height: 700,
+        center: true,
+        backgroundColor: '#000', 
+        title: 'Inventario', 
+        resizable: true,
+        maximizable: false,
+        //autoHideMenuBar: true,
+        transparent: true,
+        movable: true,
+        webPreferences:{
+        nodeIntegration: true
+        }
+    })
+    window.loadFile('./proveedores/menu.html');
 }
 
 
@@ -110,8 +148,10 @@ const conn = await getConnection();
 const results = await conn.query ("SELECT * FROM Empleado WHERE Correo_Electronico = ? AND Contraseña = ?", [user, password])
     if (password && user) {
         if(results.length > 0){
-            createWindowUsr()
-            createWindowInv ()
+            //createWindowUsr()
+            //createWindowInv ()
+            createWindowMenu()
+
             //console.log("Usuario Identificado") 
             //winlogin.loadFile('./gui/inventario.html'); 
             window.show()
@@ -211,6 +251,14 @@ async function getUsers(){
     return results;
 }
 
+async function getProveedores(){
+  
+    const conn = await getConnection();
+    const results = await conn.query('SELECT * FROM Proveedor')
+  
+    //console.log(results)
+    return results;
+}
 
 module.exports = {
     loginWindow,
@@ -221,5 +269,6 @@ module.exports = {
     deleteProduct,
     getProductById,
     getUsers,
+    getProveedores,
     updateProduct
 };
