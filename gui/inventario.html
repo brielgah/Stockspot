@@ -131,12 +131,12 @@
         </div>
         <div class="row justify-content-between gap-2 mt-4">
           <div class="col d-flex justify-content-center">
-            <button class="btn btn-primary boton" type="button">
+            <button class="btn btn-primary boton" type="button" data-bs-toggle="modal" data-bs-target="#ingresoPopUp">
               <span class="texto">Ingresar</span>
             </button>
           </div>
           <div class="col d-flex justify-content-center">
-            <button type="button" class="btn btn-primary boton">
+            <button type="button" class="btn btn-primary boton" data-bs-toggle="modal" data-bs-target="#ingresoPopUp">
               <span class="texto">Modificar</span>
             </button>
           </div>
@@ -150,6 +150,40 @@
     </div>
     <!-- Termina tabla -->
 
+    <!-- Empieza pop up registro -->
+    <div class="modal fade" id="ingresoPopUp" tabindex="-1" aria-labelledby="ingresoPopUpLabel" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="ingresoPopUpLabel">Registro de producto</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <div class="row mb-3">
+              <label for="nombreInputLabel" class="form-label">Nombre</label>
+              <input class="form-control" type="text" placeholder="Agua" aria-label="nombreInput">
+            </div>
+            <div class="row mb-3">
+              <label for="precioInputLabel" class="form-label">Precio</label>
+              <input class="form-control" type="text" placeholder="15.00" aria-label="precioInput">
+            </div>
+            <div class="row mb-3">
+              <label for="descripcionInputLabel" class="form-label">Descripción</label>
+              <input class="form-control" type="text" placeholder="Botella de agua marca Ciel" aria-label="descripcionInput">
+            </div>
+            <div class="row mb-3">
+              <label for="stockInputLabel" class="form-label">Stock</label>
+              <input class="form-control" type="text" placeholder="30" aria-label="stockInput">
+            </div>
+          </div>
+          <div class="modal-footer d-flex justify-content-between">
+            <button type="button" class="btn btn-primary">Guardar</button>
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Termina pop up -->
 
     <!-- Empieza el menu offcanvas -->
     <div class="offcanvas offcanvas-end" tabindex="-1" id="menu" aria-labelledby="offcanvasExampleLabel">
