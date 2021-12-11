@@ -5,12 +5,6 @@ const productForm = document.getElementById('productForm');
 const { remote } = require('electron')
 const main = remote.require('./main') 
 
-//Se definen los nombres de elementos nombre, precio, color, stock y descripcion por Id
-//const productName = document.getElementById('name');
-//const productPrice = document.getElementById('price');
-//const productColor = document.getElementById('color');
-//const productStock = document.getElementById('stock');
-//const productDescription = document.getElementById('description');
 const productList = document.getElementById('productos');
 
 //let cant = 0
@@ -19,78 +13,7 @@ let products = []
 let editingStatus = false;
 let editproductId = '';
 
-/*Definimos el evento enviar del formulario
-productForm.addEventListener('submit' , async (e) =>{
-    e.preventDefault();
-    //Se definen los elementos para insertar un nuevo producto
-    //Se enviaran por el objeto nweProduct
-    const newProduct = {
-        name: productName.value,
-        price: productPrice.value,
-        color: productColor.value,
-        stock: productStock.value,
-        description: productDescription.value
-    }
 
-    if(!editingStatus){
-        const result = await main.createProduct(newProduct)
-        console.log(result);
-        //Alerta de sweetalert definida en index.html
-        swal({
-            icon: "success",
-        });
-    }else{
-        await main.updateProduct(editproductId, newProduct);
-        editingStatus = false;
-        editproductId = '';
-        //Alerta de sweetalert
-        swal({
-            icon: "info",
-            title: 'Producto Actualizado',
-            width: 600,
-        });
-    }
-    
-    productForm.reset();
-    productName.focus();
-
-    getProducts();
-    getCantidad();
-})
-
-//Funcion de eleminar y alertas
-async function deleteProduct(id){
-    const response = confirm('❓ || ¿Esta seguro que desea eliminar este producto?')
-    if(response){
-        await main.deleteProduct(id)
-        await getProducts();
-        await getCantidad();
-        productForm.reset();
-        productName.focus();
-        
-        swal({
-            text: "Eliminado",
-            icon: "success",
-        });
-
-    }
-    return;
-}
-
-async function editProduct(id){
-    const product = await main.getProductById(id);
-    productName.value = product.name;
-    productPrice.value = product.price;
-    productColor.value = product.color;
-    productStock.value = product.stock;
-    productDescription.value = product.description;
-
-    editingStatus = true;
-    editproductId = product.id;
-    //await getProducts();
-}*/
-
-//Se mustran los productos guardados de la bd de lado izquierdo
 function renderProducts(products){
     productList.innerHTML= '';
     products.forEach(element => {
@@ -110,26 +33,110 @@ function renderProducts(products){
         `
     });
 }
+
+let btnGuardar = document.getElementById("btnGuardar");
+let btnIngresar = document.getElementById("btnIngresar");
+let btnModificar = document.getElementById("mbtnModificar");
+let btnEliminar = document.getElementById("ebtnEliminar");
+let btnConsulta = document.getElementById("btnConsulta");
+
+let nombre;
+let precio;
+let stock;
+let descripcion;
+let sw = 0;
+
+btnIngresar.onclick = function (){
+    sw = 1; 
+};
+
+btnModificar.onclick = function (){
+    modifyProducto();
+    nombre = document.getElementById("mnombreInput");
+    precio = document.getElementById("mprecioInput");
+    stock = document.getElementById("mstockInput");
+    descripcion = document.getElementById("mdescripcionInput");
+
+    nombre.value = "";
+    precio.value = "";
+    stock.value = "";
+    descripcion.value = "";
+    getProducts();
+    
+};
+
+btnEliminar.onclick = function(){
+    eliminarProducto();
+}
+
+btnConsulta.onclick = function(){
+    searchProducto();
+}
+
+const eliminarProducto =async ()=>{
+    nombre = document.getElementById("enombreInput");
+    const producto = {nombre:nombre.value};
+
+    await main.deleteProducto(producto);
+    name.value = "";
+    getProducts();
+
+}   
+
+btnGuardar.onclick = function (){
+        setProducto();
+        getProducts();        
+};
+
+let cpy;
+
+const searchProducto = async()=>{
+    sw = 3;
+    nombre = document.getElementById("mnombreInput");
+    precio = document.getElementById("mprecioInput");
+    stock = document.getElementById("mstockInput");
+    descripcion = document.getElementById("mdescripcionInput");
+
+    const producto = {nombre:nombre.value};
+    
+    cpy = await main.searchProducto(producto);
+
+    nombre.value = cpy.Nombre;
+    stock.value = cpy.Stock;
+    precio.value = cpy.Precio;
+    descripcion.value = cpy.Descripcion;
+
+}
+
+const modifyProducto = async()=>{
+    nombre = document.getElementById("mnombreInput");
+    precio = document.getElementById("mprecioInput");
+    stock = document.getElementById("mstockInput");
+    descripcion = document.getElementById("mdescripcionInput");
+    const producto = {id:null, nombre:nombre.value, precio:parseFloat(precio.value),stock:parseInt(stock.value)
+    ,descripcion:descripcion.value};
+    await main.modifyProducto(sw, cpy, producto);
+    sw = 0;
+    cpy = {};  
+};
+
+const setProducto = async() =>{
+    nombre = document.getElementById("inombreInput");
+    precio = document.getElementById("iprecioInput");
+    stock = document.getElementById("istockInput");
+    descripcion = document.getElementById("idescripcionInput");
+    const producto = {id:null, nombre:nombre.value, precio:parseFloat(precio.value),stock:parseInt(stock.value)
+    ,descripcion:descripcion.value};
+    await main.createProducto(producto);
+
+}
+
 const getProducts = async () =>{
     products = await main.getProducts();
     renderProducts(products);
 }
 
-/*function renderCantidad(cant){
-    cant.forEach(element => {
-        console.log(element.Cantidad)
-        document.getElementById('cantidad').innerHTML = element.Cantidad
-    });
-}*/
-
-//Al utilizarse sql estas funciones seran asincronas
-/*const getCantidad = async () =>{
-    cant = await main.getCantidad();
-    renderCantidad(cant);
-}*/
-
 async function init(){
-    //console.log("Hola, esto en init")
     await getProducts();
    // await getCantidad();
 }

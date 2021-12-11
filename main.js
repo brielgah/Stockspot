@@ -613,6 +613,155 @@ async function deleteProveedor(proveedor){
 
 }
 
+
+//Funciones de inventario
+async function createProducto(producto){
+    try{
+        const conn = await getConnection();
+        const result = await conn.query('INSERT INTO Producto (Nombre, Precio,Stock,Descripcion) values (?,?,?,?)',
+                            [producto.nombre, producto.precio, producto.stock,producto.descripcion]);
+        console.log(result)
+        
+        new Notification({
+            title: 'StockSpot',
+            body: '✔ Producto guardado!   ID:'+result.insertId,
+            subtitle: 'Se mostrara en la bd',
+            timeoutType: 'default'
+        }).show();
+
+        producto.id = result.insertId;
+        return producto
+    }catch(error){
+        new Notification({
+            title: 'StockSpot',
+            body: '❌ Error'+'\n'+ error,
+            subtitle: 'Verificar en bd',
+            timeoutType: 'default'
+        }).show();
+        console.log(error)
+    }    
+}
+
+async function getProducts(){
+    //console.log("Hola, esto en main get products")
+    const conn = await getConnection();
+    const results = await conn.query('SELECT * FROM Producto')
+    // const results = await conn.query('SELECT COUNT(*) FROM product');
+    //console.log(results)
+    return results;
+}
+
+async function searchProducto(producto){
+    try{
+        const conn = await getConnection();
+        
+        const result = await conn.query('SELECT * FROM Producto WHERE Nombre=?',[producto.nombre])
+        
+        if(result !== []){
+            producto=result[0];
+            new Notification({
+                title: 'StockSpot',
+                body: 'Producto Encontrado!',
+                subtitle: ':D',
+                timeoutType: 'default'
+            }).show();
+            
+        }
+        else{
+            new Notification({
+                title: 'StockSpot',
+                body: 'Producto No Encontrado!',
+                subtitle: ':c',
+                timeoutType: 'default'
+            }).show();
+        }
+        return producto;
+    }catch(error){
+        new Notification({
+            title: 'StockSpot',
+            body: '❌ Error'+'\n'+ error,
+            subtitle: 'Verificar en bd',
+            timeoutType: 'default'
+        }).show();
+        console.log(error)
+        
+    }
+}
+
+async function modifyProducto(sw,cpy, producto){
+    if(sw === 3){
+            try{
+                
+                    const conn = await getConnection();
+                
+                    const id = cpy.ID_Producto;
+                    
+               
+                    const result2 = await conn.query('UPDATE Producto SET Nombre=?, Precio=?, Stock=?, Descripcion=? WHERE ID_Producto=?',[producto.nombre, producto.precio, producto.stock, producto.descripcion, id])
+                   
+                    new Notification({
+                        title: 'StockSpot',
+                        body: '✔ Producto Modificado!',
+                        subtitle: ':D',
+                        timeoutType: 'default'
+                    }).show();
+                    
+                
+                
+        
+            }catch(error){
+                new Notification({
+                    title: 'StockSpot',
+                    body: '❌ Error'+'\n'+ error,
+                    subtitle: 'Verificar en bd',
+                    timeoutType: 'default'
+                }).show();
+                console.log(error)
+                
+            }
+    }
+    else{
+        new Notification({
+            title: 'StockSpot',
+            body: '❌ Primero debes introducir un Producto',
+            subtitle: 'Verificar en bd',
+            timeoutType: 'default'
+        }).show();
+    }
+}
+
+async function deleteProducto(producto){
+    try{
+        const conn = await getConnection();
+        //console.log(proveedor)
+        const result = await conn.query('SELECT ID_Producto FROM Producto WHERE Nombre=?',[producto.nombre])
+        const id = result[0].ID_Producto;
+        //console.log(result[0])
+        //console.log(id)
+        const result2 = await conn.query('DELETE FROM Producto where ID_Producto = ?',id)        
+
+
+        new Notification({
+            title: 'StockSpot',
+            body: '✔ Producto Eliminado!   ',
+            subtitle: 'Adios',
+            timeoutType: 'default'
+        }).show();
+  
+    }catch(error){
+        new Notification({
+            title: 'StockSpot',
+            body: '❌ Error'+'\n'+ error,
+            subtitle: 'Verificar en bd',
+            timeoutType: 'default'
+        }).show();
+        console.log(error)
+        
+    }
+
+}
+
+
 module.exports = {
     loginWindow,
     createWindow,
@@ -632,5 +781,10 @@ module.exports = {
     searchProveedor,
     modifyProveedor,
     deleteProveedor,
-    updateProduct
+    updateProduct,
+    createProducto,
+    searchProducto,
+    modifyProducto,
+    deleteProducto
+
 };
