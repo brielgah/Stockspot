@@ -2,6 +2,7 @@
 const { app, appusr, BrowserWindow, ipcMain, Notification } = require('electron');
 const {getConnection} = require('./database');
 const path = require('path'); 
+const { windowsStore } = require('process');
 
 
 let window;
@@ -201,6 +202,9 @@ async function createProduct(product){
     }    
 }
 
+async function refreshCurWindow(){
+    window.reload()
+}
 
 async function getProducts(){
     console.log("Hola, esto en main get products")
@@ -219,6 +223,33 @@ async function getCantidad(){
     return result;
 }
 
+
+async function createUser(user){
+    try{
+        const conn = await getConnection();
+        const result = await conn.query('INSERT INTO Empleado (Nombre, Edad, Correo_Electronico, Sueldo, Sexo, Contraseña) values (?,?,?,?,?,?)',
+                            [user.nombre, user.edad, user.correo, user.sueldo, user.sexo, user.password]);
+        console.log(result)
+        
+        new Notification({
+            title: 'Run Mountain',
+            body: '✔ Usuario guardado!   ID:'+result.insertId,
+            subtitle: 'Se mostrara en la bd',
+            timeoutType: 'default'
+        }).show();
+
+        user.id = result.insertId;
+        return user
+    }catch(error){
+        new Notification({
+            title: 'Run Mountain',
+            body: '❌ Error'+'\n'+ error,
+            subtitle: 'Verificar en bd',
+            timeoutType: 'default'
+        }).show();
+        console.log(error)
+    }    
+}
 
 async function deleteProduct(id){
     const conn = await getConnection();
@@ -251,6 +282,114 @@ async function getUsers(){
     return results;
 }
 
+async function searchUser(user){
+    try{
+        const conn = await getConnection();
+        
+        const result = await conn.query('SELECT * FROM Empleado WHERE Correo_Electronico=? AND Contraseña=?',[user.correo,user.password])
+        
+        if(result !== []){
+            user=result[0];
+            new Notification({
+                title: 'Run Mountain',
+                body: 'Usuario Encontrado!',
+                subtitle: 'Adios',
+                timeoutType: 'default'
+            }).show();
+            
+        }
+        else{
+            new Notification({
+                title: 'Run Mountain',
+                body: 'Usuario No Encontrado!',
+                subtitle: 'Adios',
+                timeoutType: 'default'
+            }).show();
+        }
+        return user;
+    }catch(error){
+        new Notification({
+            title: 'Run Mountain',
+            body: '❌ Error'+'\n'+ error,
+            subtitle: 'Verificar en bd',
+            timeoutType: 'default'
+        }).show();
+        console.log(error)
+        
+    }
+}
+
+async function modifyUser(sw,cpy, user){
+    if(sw === 3){
+            try{
+                
+                    const conn = await getConnection();
+                
+                    const id = cpy.ID_Empleado;
+                    
+                    
+                    const result2 = await conn.query('UPDATE Empleado SET Correo_Electronico=?, Nombre=?, Edad=?, Sexo=?, Sueldo=?, Contraseña=?  WHERE ID_Empleado=?',[user.correo, user.nombre, user.edad, user.sexo,user.sueldo,user.password,id])
+                   
+                    new Notification({
+                        title: 'Run Mountain',
+                        body: '✔ Usuario Modificado!',
+                        subtitle: 'Adios',
+                        timeoutType: 'default'
+                    }).show();
+                    
+                
+                
+        
+            }catch(error){
+                new Notification({
+                    title: 'Run Mountain',
+                    body: '❌ Error'+'\n'+ error,
+                    subtitle: 'Verificar en bd',
+                    timeoutType: 'default'
+                }).show();
+                console.log(error)
+                
+            }
+    }
+    else{
+        new Notification({
+            title: 'Run Mountain',
+            body: '❌ Primero debes introducir un Usuario',
+            subtitle: 'Verificar en bd',
+            timeoutType: 'default'
+        }).show();
+    }
+}
+
+async function deleteUser(user){
+    try{
+        const conn = await getConnection();
+        
+        const result = await conn.query('SELECT ID_Empleado FROM Empleado WHERE Correo_Electronico=? AND Contraseña=?',[user.email,user.password])
+        const id = result[0].ID_Empleado;
+        const result2 = await conn.query('DELETE FROM Empleado where ID_Empleado=?',id)        
+
+
+        new Notification({
+            title: 'Run Mountain',
+            body: '✔ Usuario Eliminado!   ',
+            subtitle: 'Adios',
+            timeoutType: 'default'
+        }).show();
+  
+    }catch(error){
+        new Notification({
+            title: 'Run Mountain',
+            body: '❌ Error'+'\n'+ error,
+            subtitle: 'Verificar en bd',
+            timeoutType: 'default'
+        }).show();
+        console.log(error)
+        
+    }
+
+}
+
 async function getProveedores(){
   
     const conn = await getConnection();
@@ -263,6 +402,11 @@ async function getProveedores(){
 module.exports = {
     loginWindow,
     createWindow,
+    refreshCurWindow,
+    createUser,
+    searchUser,
+    modifyUser,
+    deleteUser,
     createProduct,
     getProducts,
     getCantidad,
