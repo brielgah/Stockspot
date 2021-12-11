@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'">
+    <meta http-equiv="Content-Security-Policy" content="default-src *;img-src * 'self' data: https:; script-src 'self' 'unsafe-inline' 'unsafe-eval' *; style-src  'self' 'unsafe-inline' *">
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <link rel="stylesheet" href="css/menu.css">
     <link rel="stylesheet" href="css/all.min.css">
@@ -24,9 +24,9 @@
           <h2 class="ms-2">Menú Principal</h2>
         </div>
         <div class="col1 d-flex justify-content-center">
-          <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#menu" aria-controls="menu">
-                <i class="fas barras fa-bars"></i>
-          </button>
+          <a class="btn btn-link" href="index.html">
+                Cerrar sesión
+          </a>
         </div>
       </div>
     </div> 
