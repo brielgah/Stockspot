@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'">
+    <meta http-equiv="Content-Security-Policy" content="default-src *;img-src * 'self' data: https:; script-src 'self' 'unsafe-inline' 'unsafe-eval' *; style-src  'self' 'unsafe-inline' *">
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <link rel="stylesheet" href="css/inventario.css">
     <link rel="stylesheet" href="css/all.min.css">
@@ -193,7 +193,10 @@
             <a class="nav-link" href="proveedores.html">Proveedores</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="inventario.html">Compra</a>
+            <a class="nav-link" href="compra.html">Compra</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="venta.html">Venta</a>
           </li>
        </ul> 
       </div>

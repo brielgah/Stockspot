@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'">
+  <meta http-equiv="Content-Security-Policy" content="default-src *;img-src * 'self' data: https:; script-src 'self' 'unsafe-inline' 'unsafe-eval' *; style-src  'self' 'unsafe-inline' *">
   <link rel="stylesheet" href="css/bootstrap.min.css">
   <link rel="stylesheet" href="css/compra.css">
   <link rel="stylesheet" href="css/all.min.css">
@@ -34,9 +34,18 @@
     </div>
   </div>
   <!-- Termina navbar -->
-    <div class="d-flex container-fluid align-items-center justify-content-center">
-        <div class="">
-            <p>Proveedor: <span class="p-3 mb-2 bg-secondary rounded">Marinela</span></p>
+    <div class="d-flex container-fluid justify-content-center align-items-center">
+        <div class="row align-items-center justify-content-start mt-4">
+          <div class="col-sm-4">
+            <div class="d-flex flex-column">
+              <span class="align-self-center">Proveedor: </span>
+            </div>
+          </div>
+          <div class="col-sm-8 d-flex justify-content-center align-items-center">
+            <select class="form-select" aria-label="Default select example">
+              <option selected>Elige un proveedor</option>
+            </select>
+          </div>
         </div>
     </div>
   <!-- Empieza tabla -->
@@ -60,7 +69,7 @@
                 <tr>
                   <th>
                     <button class="navbar-toggler" type="button">
-                      <i class="fas fa-times"></i>
+                      <i class="fas fa-plus"></i>
                     </button>
                   </th>
                   <th scope="row">Leche Santa Clara 1 lt</th>
@@ -70,7 +79,7 @@
                 <tr>
                   <th>
                     <button class="navbar-toggler" type="button">
-                      <i class="fas fa-times"></i>
+                      <i class="fas fa-plus"></i>
                     </button>
                   </th>
                   <th scope="row">Atun Dolores en agua 330gr</th>
@@ -80,7 +89,7 @@
                 <tr>
                   <th>
                     <button class="navbar-toggler" type="button">
-                      <i class="fas fa-times"></i>
+                      <i class="fas fa-plus"></i>
                     </button>
                   </th>
                   <th scope="row">Queso oaxaca La Villita 500gr</th>
@@ -90,7 +99,7 @@
                 <tr>
                   <th>
                     <button class="navbar-toggler" type="button">
-                      <i class="fas fa-times"></i>
+                      <i class="fas fa-plus"></i>
                     </button>
                   </th>
                   <th scope="row">Cerveza Stella Artois 255ml six</th>
@@ -100,7 +109,7 @@
                 <tr>
                   <th>
                     <button class="navbar-toggler" type="button">
-                      <i class="fas fa-times"></i>
+                      <i class="fas fa-plus"></i>
                     </button>
                   </th>
                   <th scope="row">Atun Dolores en agua 330gr</th>
@@ -110,7 +119,7 @@
                 <tr>
                   <th>
                     <button class="navbar-toggler" type="button">
-                      <i class="fas fa-times"></i>
+                      <i class="fas fa-plus"></i>
                     </button>
                   </th>
                   <th scope="row">Cerveza Stella Artois 255ml six</th>
@@ -128,17 +137,12 @@
       </div>
       <div class="row justify-content-between gap-2 mt-4">
         <div class="col d-flex justify-content-center">
-          <button class="btn btn-primary boton" type="button">
-            <span class="texto">Eliminar</span>
-          </button>
-        </div>
-        <div class="col d-flex justify-content-center">
           <button type="button" class="btn btn-primary boton">
-            <span class="texto">Agregar</span>
+            <span class="texto">Carrito</span>
           </button>
         </div>
         <div class="col d-flex justify-content-center">
-          <button type="button" class="btn btn-primary boton ">
+          <button type="button" class="btn btn-primary boton text-center">
             <span class="texto">Realizar Compra</span>
           </button>
         </div>
@@ -168,7 +172,10 @@
           <a class="nav-link" href="inventario.html">Inventario</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="inventario.html">Compra</a>
+          <a class="nav-link" href="proveedores.html">Proveedores</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="venta.html">Venta</a>
         </li>
       </ul>
     </div>
