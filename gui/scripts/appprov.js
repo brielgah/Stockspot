@@ -6,78 +6,7 @@ let proveedores = []
 let editingStatus = false;
 let editiserId = '';
 
-/*Definimos el evento enviar del formulario
-productForm.addEventListener('submit' , async (e) =>{
-    e.preventDefault();
-    //Se definen los elementos para insertar un nuevo producto
-    //Se enviaran por el objeto nweProduct
-    const newProduct = {
-        name: productName.value,
-        price: productPrice.value,
-        color: productColor.value,
-        stock: productStock.value,
-        description: productDescription.value
-    }
-
-    if(!editingStatus){
-        const result = await main.createProduct(newProduct)
-        console.log(result);
-        //Alerta de sweetalert definida en index.html
-        swal({
-            icon: "success",
-        });
-    }else{
-        await main.updateProduct(editproductId, newProduct);
-        editingStatus = false;
-        editproductId = '';
-        //Alerta de sweetalert
-        swal({
-            icon: "info",
-            title: 'Producto Actualizado',
-            width: 600,
-        });
-    }
-    
-    productForm.reset();
-    productName.focus();
-
-    getProducts();
-    getCantidad();
-})
-
-//Funcion de eleminar y alertas
-async function deleteProduct(id){
-    const response = confirm('❓ || ¿Esta seguro que desea eliminar este producto?')
-    if(response){
-        await main.deleteProduct(id)
-        await getProducts();
-        await getCantidad();
-        productForm.reset();
-        productName.focus();
-        
-        swal({
-            text: "Eliminado",
-            icon: "success",
-        });
-
-    }
-    return;
-}
-
-async function editProduct(id){
-    const product = await main.getProductById(id);
-    productName.value = product.name;
-    productPrice.value = product.price;
-    productColor.value = product.color;
-    productStock.value = product.stock;
-    productDescription.value = product.description;
-
-    editingStatus = true;
-    editproductId = product.id;
-    //await getProducts();
-}*/
-
-//Se mustran los productos guardados de la bd de lado izquierdo
+//Se mustran los proveedores guardados de la bd de lado izquierdo
 function renderProveedores(proveedores){
     proveedoresList.innerHTML= '';
     proveedores.forEach(element => {
@@ -96,10 +25,121 @@ function renderProveedores(proveedores){
         `
     });
 }
+
 const getProveedores = async () =>{
     proveedores = await main.getProveedores();
     renderProveedores(proveedores);
 }
+
+let btnGuardar = document.getElementById("btnGuardar");
+let btnIngresar = document.getElementById("btnIngresar");
+let btnModificar = document.getElementById("mbtnModificar");
+let btnEliminar = document.getElementById("ebtnEliminar");
+let btnConsulta = document.getElementById("btnConsulta");
+
+let nombre;
+let numero;
+let compania;
+
+let sw = 0;
+
+btnIngresar.onclick = function (){
+    sw = 1;
+};
+
+btnModificar.onclick = function (){
+    modifyProveedor();
+    nombre = document.getElementById("mnombreInput");
+    numero = document.getElementById("mnumeroInput");
+    compania = document.getElementById("mcompaniaInput");
+
+    nombre.value = "";
+    correo.value = "";
+    compania.value = "";
+
+    getProveedores();
+    
+};
+
+btnEliminar.onclick = function(){
+    eliminarProveedor();
+}
+
+btnConsulta.onclick = function(){
+    searchProveedor();
+}
+
+const eliminarProveedor =async ()=>{
+    numero = document.getElementById("enumeroInput");
+    compania = document.getElementById("ecompaniaInput");
+
+
+    const proveedor = {compania:compania.value, numero:numero.value};
+    console.log(proveedor)
+    console.log("Hola")
+    await main.deleteProveedor(proveedor);
+    compania.value = "";
+    numero.value="";
+    getProveedores();
+
+}   
+
+const setProveedor = async() =>{
+    nombre = document.getElementById("inombreInput");
+    numero = document.getElementById("inumeroInput");
+    compania = document.getElementById("icompaniaInput");
+    
+    const proveedor = {id:null, nombre:nombre.value, numero:numero.value,compania:compania.value};
+    
+    await main.createProveedor(proveedor);
+
+  
+
+}
+
+
+btnGuardar.onclick = function (){
+        setProveedor();
+        getProveedores();
+};
+
+let cpy;
+
+
+const searchProveedor = async()=>{
+    sw = 3;
+    nombre = document.getElementById("mnombreInput");
+    numero = document.getElementById("mnumeroInput");
+    compania = document.getElementById("mcompaniaInput");
+        
+    const proveedor = {numero:numero.value,compania:compania.value};
+
+    cpy = await main.searchProveedor(proveedor);
+
+    nombre.value = cpy.Nombre;
+    numero.value = cpy.Numero;
+    compania.value = cpy.Compania;
+
+       
+}
+
+
+const modifyProveedor = async()=>{
+        nombre = document.getElementById("mnombreInput");
+        numero = document.getElementById("mnumeroInput");
+        compania = document.getElementById("mcompaniaInput");
+        
+
+        const proveedor = {id:null, nombre:nombre.value, numero:numero.value,compania:compania.value};
+        await main.modifyProveedor(sw, cpy, proveedor);
+        sw = 0;
+        cpy = {};
+
+       
+    
+    
+};
+
 
 /*function renderCantidad(cant){
     cant.forEach(element => {

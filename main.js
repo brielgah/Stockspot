@@ -211,7 +211,7 @@ async function getProducts(){
     const conn = await getConnection();
     const results = await conn.query('SELECT * FROM Producto')
     // const results = await conn.query('SELECT COUNT(*) FROM product');
-    console.log(results)
+    //console.log(results)
     return results;
 }
 
@@ -272,6 +272,8 @@ async function updateProduct(id, product){
     console.log(result)
 }
 
+
+//Funciones de empleado
 
 async function getUsers(){
     //console.log("Hola, esto en main get usuarios")
@@ -390,6 +392,108 @@ async function deleteUser(user){
 
 }
 
+
+async function modifyUser(sw,cpy, user){
+    if(sw === 3){
+            try{
+                
+                    const conn = await getConnection();
+                
+                    const id = cpy.ID_Empleado;
+                    
+                    
+                    const result2 = await conn.query('UPDATE Empleado SET Correo_Electronico=?, Nombre=?, Edad=?, Sexo=?, Sueldo=?, Contraseña=?  WHERE ID_Empleado=?',[user.correo, user.nombre, user.edad, user.sexo,user.sueldo,user.password,id])
+                   
+                    new Notification({
+                        title: 'Run Mountain',
+                        body: '✔ Usuario Modificado!',
+                        subtitle: 'Adios',
+                        timeoutType: 'default'
+                    }).show();
+                    
+                
+                
+        
+            }catch(error){
+                new Notification({
+                    title: 'Run Mountain',
+                    body: '❌ Error'+'\n'+ error,
+                    subtitle: 'Verificar en bd',
+                    timeoutType: 'default'
+                }).show();
+                console.log(error)
+                
+            }
+    }
+    else{
+        new Notification({
+            title: 'Run Mountain',
+            body: '❌ Primero debes introducir un Usuario',
+            subtitle: 'Verificar en bd',
+            timeoutType: 'default'
+        }).show();
+    }
+}
+
+async function deleteUser(user){
+    try{
+        const conn = await getConnection();
+        
+        const result = await conn.query('SELECT ID_Empleado FROM Empleado WHERE Correo_Electronico=? AND Contraseña=?',[user.email,user.password])
+        const id = result[0].ID_Empleado;
+        const result2 = await conn.query('DELETE FROM Empleado where ID_Empleado=?',id)        
+
+
+        new Notification({
+            title: 'Run Mountain',
+            body: '✔ Usuario Eliminado!   ',
+            subtitle: 'Adios',
+            timeoutType: 'default'
+        }).show();
+  
+    }catch(error){
+        new Notification({
+            title: 'Run Mountain',
+            body: '❌ Error'+'\n'+ error,
+            subtitle: 'Verificar en bd',
+            timeoutType: 'default'
+        }).show();
+        console.log(error)
+        
+    }
+
+}
+
+//Funciones de proveedores
+async function createProveedor(proveedor){
+    try{
+        const conn = await getConnection();
+        const result = await conn.query('INSERT INTO Proveedor (Nombre, Numero,Compania) values (?,?,?)',
+                            [proveedor.nombre, proveedor.numero, proveedor.compania]);
+        console.log(result)
+        
+        new Notification({
+            title: 'StockSpot',
+            body: '✔ Proveedor guardado!   ID:'+result.insertId,
+            subtitle: 'Se mostrara en la bd',
+            timeoutType: 'default'
+        }).show();
+
+        proveedor.id = result.insertId;
+        return proveedor
+    }catch(error){
+        new Notification({
+            title: 'StockSpot',
+            body: '❌ Error'+'\n'+ error,
+            subtitle: 'Verificar en bd',
+            timeoutType: 'default'
+        }).show();
+        console.log(error)
+    }    
+}
+
+
+
 async function getProveedores(){
   
     const conn = await getConnection();
@@ -397,6 +501,116 @@ async function getProveedores(){
   
     //console.log(results)
     return results;
+}
+
+async function searchProveedor(proveedor){
+    try{
+        const conn = await getConnection();
+        
+        const result = await conn.query('SELECT * FROM Proveedor WHERE Numero=? AND Compania=?',[proveedor.numero,proveedor.compania])
+        
+        if(result !== []){
+            user=result[0];
+            new Notification({
+                title: 'StockSpot',
+                body: 'Proveedor Encontrado!',
+                subtitle: ':D',
+                timeoutType: 'default'
+            }).show();
+            
+        }
+        else{
+            new Notification({
+                title: 'StockSpot',
+                body: 'Proveedor No Encontrado!',
+                subtitle: ':c',
+                timeoutType: 'default'
+            }).show();
+        }
+        return user;
+    }catch(error){
+        new Notification({
+            title: 'StockSpot',
+            body: '❌ Error'+'\n'+ error,
+            subtitle: 'Verificar en bd',
+            timeoutType: 'default'
+        }).show();
+        console.log(error)
+        
+    }
+}
+
+async function modifyProveedor(sw,cpy, proveedor){
+    if(sw === 3){
+            try{
+                
+                    const conn = await getConnection();
+                
+                    const id = cpy.ID_Proveedor;
+                    
+               
+                    const result2 = await conn.query('UPDATE Proveedor SET Nombre=?, Numero=?, Compania=? WHERE ID_Proveedor=?',[proveedor.nombre, proveedor.numero, proveedor.compania, id])
+                   
+                    new Notification({
+                        title: 'StockSpot',
+                        body: '✔ Proveedor Modificado!',
+                        subtitle: ':D',
+                        timeoutType: 'default'
+                    }).show();
+                    
+                
+                
+        
+            }catch(error){
+                new Notification({
+                    title: 'StockSpot',
+                    body: '❌ Error'+'\n'+ error,
+                    subtitle: 'Verificar en bd',
+                    timeoutType: 'default'
+                }).show();
+                console.log(error)
+                
+            }
+    }
+    else{
+        new Notification({
+            title: 'StockSpot',
+            body: '❌ Primero debes introducir un Proveedor',
+            subtitle: 'Verificar en bd',
+            timeoutType: 'default'
+        }).show();
+    }
+}
+
+async function deleteProveedor(proveedor){
+    try{
+        const conn = await getConnection();
+        //console.log(proveedor)
+        const result = await conn.query('SELECT ID_Proveedor FROM Proveedor WHERE Compania=? AND Numero=?',[proveedor.compania,proveedor.numero])
+        const id = result[0].ID_Proveedor;
+        //console.log(result[0])
+        //console.log(id)
+        const result2 = await conn.query('DELETE FROM Proveedor where ID_Proveedor = ?',id)        
+
+
+        new Notification({
+            title: 'StockSpot',
+            body: '✔ Provevedor Eliminado!   ',
+            subtitle: 'Adios',
+            timeoutType: 'default'
+        }).show();
+  
+    }catch(error){
+        new Notification({
+            title: 'StockSpot',
+            body: '❌ Error'+'\n'+ error,
+            subtitle: 'Verificar en bd',
+            timeoutType: 'default'
+        }).show();
+        console.log(error)
+        
+    }
+
 }
 
 module.exports = {
@@ -413,6 +627,10 @@ module.exports = {
     deleteProduct,
     getProductById,
     getUsers,
+    createProveedor,
     getProveedores,
+    searchProveedor,
+    modifyProveedor,
+    deleteProveedor,
     updateProduct
 };

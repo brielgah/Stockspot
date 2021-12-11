@@ -60,17 +60,17 @@
       </div>
       <div class="row justify-content-between gap-2 mt-4">
         <div class="col d-flex justify-content-center">
-          <button class="btn btn-primary boton" type="button" data-bs-toggle="modal" data-bs-target="#ingresoPopUp">
+          <button class="btn btn-primary boton" type="button" data-bs-toggle="modal" data-bs-target="#ingresoPopUp" id="btnIngresar">
             <span class="texto">Ingresar</span>
           </button>
         </div>
         <div class="col d-flex justify-content-center">
-          <button type="button" class="btn btn-primary boton" data-bs-toggle="modal" data-bs-target="#ingresoPopUp">
+          <button type="button" class="btn btn-primary boton" data-bs-toggle="modal" data-bs-target="#modificarPopUp" id="btnModificar">
             <span class="texto">Modificar</span>
           </button>
         </div>
         <div class="col d-flex justify-content-center">
-          <button type="button" class="btn btn-primary boton ">
+          <button type="button" class="btn btn-primary boton " data-bs-toggle="modal"  data-bs-target="#eliminarPopUp">
             <span class="texto">Eliminar</span>
           </button>
         </div>
@@ -90,19 +90,19 @@
           <div class="modal-body">
             <div class="row mb-3">
               <label for="compañiaInputLabel" class="form-label">Compañia</label>
-              <input class="form-control" type="text" placeholder="Marinela" aria-label="compañiaInput">
+              <input class="form-control" type="text" placeholder="Marinela" aria-label="compañiaInput" id="icompaniaInput">
             </div>
             <div class="row mb-3">
               <label for="nombreInputLabel" class="form-label">Nombre</label>
-              <input class="form-control" type="text" placeholder="Juan Perez" aria-label="nombreInput">
+              <input class="form-control" type="text" placeholder="Juan Perez" aria-label="nombreInput" id="inombreInput">
             </div>
             <div class="row mb-3">
               <label for="numeroInputLabel" class="form-label">Número</label>
-              <input class="form-control" type="text" placeholder="5512365490" aria-label="numeroInput">
+              <input class="form-control" type="text" placeholder="5512365490" aria-label="numeroInput" id="inumeroInput">
             </div>
           </div>
           <div class="modal-footer d-flex justify-content-between">
-            <button type="button" class="btn btn-primary">Guardar</button>
+            <button type="button" class="btn btn-primary" id="btnGuardar">Guardar</button>
             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
           </div>
         </div>
@@ -110,6 +110,67 @@
     </div>
     <!-- Termina pop up -->
 
+    <!-- Empieza pop up modificar-->
+    <div class="modal fade" id="modificarPopUp" tabindex="-1" aria-labelledby="ingresoPopUpLabel" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="ingresoPopUpLabel">Modificar proveedor</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <div class="row mb-3">
+              <label for="compañiaInputLabel" class="form-label">Compañia</label>
+              <input class="form-control" type="text" placeholder="Marinela" aria-label="compañiaInput" id="mcompaniaInput">
+            </div>
+            <div class="row mb-3">
+              <label for="nombreInputLabel" class="form-label">Nombre</label>
+              <input class="form-control" type="text" placeholder="Juan Perez" aria-label="nombreInput" id="mnombreInput">
+            </div>
+            <div class="row mb-3">
+              <label for="numeroInputLabel" class="form-label">Número</label>
+              <input class="form-control" type="text" placeholder="5512365490" aria-label="numeroInput" id="mnumeroInput">
+            </div>
+          </div>
+          <div class="modal-footer d-flex justify-content-between">
+            <button type="button" class="btn btn-primary" id="mbtnModificar">Modificar</button>
+            <button type="button" class="btn btn-primary" id="btnConsulta">Consulta</button>
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Termina pop up -->
+
+  <div class="modal fade" id="eliminarPopUp" tabindex="-1" aria-labelledby="ingresoPopUpLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content p-3">
+        <div class="modal-header">
+          <h5 class="modal-title" id="ingresoPopUpLabel">Eliminar Proveedor</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+         
+          <div class="row mb-3">
+            <label for="emailInputLabel" class="form-label">Compañia</label>
+            <input class="form-control" type="text" placeholder="Bimbo"  id="ecompaniaInput">
+          </div>
+       
+          <div class="row mb-3">
+            <label for="passwordInputLabel" class="form-label">Numero</label>
+            <input class="form-control" type="text" placeholder="1234567890" id="enumeroInput">
+          </div>
+          <div class="row mb-3">
+            <div class="modal-footer d-flex justify-content-between">
+              <button type="button" class="btn btn-primary" id="ebtnEliminar" data-bs-dismiss="modal">Eliminar</button>
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+<!-- Termina pop up -->
 
   <!-- Empieza el menu offcanvas -->
   <div class="offcanvas offcanvas-end" tabindex="-1" id="menu" aria-labelledby="offcanvasExampleLabel">
