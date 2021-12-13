@@ -112,7 +112,7 @@
                 </tr>
                 <tr>
                   <th>
-                    <button class="navbar-toggler" type="button" data-bs-toggle="modal" data-bs-target="#cantidadPopUp">
+                    <button class="navbar-toggler" type="button" data-bs-toggle="modal" data-bs-target="#cantidadPopUp" onclick="">
                       <i class="fas fa-plus"></i>
                     </button>
                   </th>
@@ -159,7 +159,7 @@
   <!-- Pop up carrito -->
   <div class="modal fade" id="carritoPopUp" tabindex="-1" aria-labelledby="carritoPopUpLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
-      <div class="modal-content">
+      <div class="modal-content p-3">
         <div class="modal-header">
           <h5 class="modal-title" id="carritoPopUpLabel">Carrito</h5>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
@@ -253,19 +253,20 @@
   <!-- Cantidad -->
   <div class="modal fade" id="cantidadPopUp" tabindex="-1" aria-labelledby="cantidadPopUpLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
-      <div class="modal-content">
+      <div class="modal-content p-3">
         <div class="modal-header">
           <h5 class="modal-title" id="cantidadPopUpLabel">Cantidad</h5>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
           <div class="row mb-3">
-            <label for="stockInputLabel" class="form-label">Cantidad</label>
-            <input class="form-control" type="number" placeholder="30" aria-label="stockInput">
+            <label for="cantidadInputLabel" class="form-label">Cantidad</label>
+            <input class="form-control" type="number" placeholder="30" aria-label="cantidadInput" id="cantidadInput">
           </div>
         </div>
         <div class="modal-footer d-flex justify-content-center">
-          <button type="button" class="btn btn-primary">Guardar</button>          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+          <button type="button" class="btn btn-primary" onclick="agregarCarrito();">Guardar</button>          
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
         </div>
       </div>
     </div>
@@ -308,7 +309,7 @@
   var table = document.getElementById('tabla'),rIndex;
   var seleccion;
   var cantidad = 0;
-
+  var carrito = [];
 
   //Esta funcion la debemos llamar una vez que hayamos creado la tabla
   function agregarSeleccionTabla()
@@ -329,6 +330,16 @@
       }
     }
   }
+
+  function agregarCarrito()
+  {
+    cantidad = document.getElementById("cantidadInput").value;
+    console.log(cantidad);
+    seleccion.cantidad = cantidad;
+    carrito.push(seleccion);
+    console.log(carrito); 
+  }
+
   agregarSeleccionTabla();
   </script>
 </body>

@@ -12,6 +12,12 @@ h1{
     word-wrap: break-word;
 }
 
+.rounded
+{
+    background-color: #fad9bf;
+    border-radius: 25px;
+}
+
 .max-alto
 {
     height: 450px;
