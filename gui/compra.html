@@ -65,72 +65,8 @@
                   <th scope="col">Precio</th>
                 </tr>
               </thead>
-              <tbody>
-                <tr>
-                  <th>
-                    <button class="navbar-toggler" type="button" data-bs-toggle="modal" data-bs-target="#cantidadPopUp">
-                      <i class="fas fa-plus"></i>
-                    </button>
-                  </th>
-                  <th scope="row">Leche Santa Clara 1 lt</th>
-                  <td>3</td>
-                  <td>$72.00</td>
-                  
-                </tr>
-                <tr>
-                  <th>
-                    <button class="navbar-toggler" type="button" data-bs-toggle="modal" data-bs-target="#cantidadPopUp">
-                      <i class="fas fa-plus"></i>
-                    </button>
-                  </th>
-                  <th scope="row">Atun Dolores en agua 330gr</th>
-                  <td>2</td>
-                  <td>$60.00</td>
-                  
-                </tr>
-                <tr>
-                  <th>
-                    <button class="navbar-toggler" type="button" data-bs-toggle="modal" data-bs-target="#cantidadPopUp">
-                      <i class="fas fa-plus"></i>
-                    </button>
-                  </th>
-                  <th scope="row">Queso oaxaca La Villita 500gr</th>
-                  <td>1</td>
-                  <td>$85.00</td>
-                  
-                </tr>
-                <tr>
-                  <th>
-                    <button class="navbar-toggler" type="button" data-bs-toggle="modal" data-bs-target="#cantidadPopUp">
-                      <i class="fas fa-plus"></i>
-                    </button>
-                  </th>
-                  <th scope="row">Cerveza Stella Artois 255ml six</th>
-                  <td>1</td>
-                  <td>$120.00</td>
-                  
-                </tr>
-                <tr>
-                  <th>
-                    <button class="navbar-toggler" type="button" data-bs-toggle="modal" data-bs-target="#cantidadPopUp" onclick="">
-                      <i class="fas fa-plus"></i>
-                    </button>
-                  </th>
-                  <th scope="row">Atun Dolores en agua 330gr</th>
-                  <td>2</td>
-                  <td>$60.00</td>
-                  
-                </tr>
-                <tr>
-                  <th>
-                    <button class="navbar-toggler" type="button" data-bs-toggle="modal" data-bs-target="#cantidadPopUp">
-                      <i class="fas fa-plus"></i>
-                    </button>
-                  </th>
-                  <th scope="row">Cerveza Stella Artois 255ml six</th>
-                  <td>1</td>
-                  <td>$120.00</td>                  
-                </tr>
+              <tbody id = "productosc">
+                
               </tbody>
           </table>
         </div>
@@ -142,12 +78,12 @@
       </div>
       <div class="row justify-content-between gap-2 mt-4">
         <div class="col d-flex justify-content-center">
-          <button type="button" class="btn btn-primary boton" data-bs-toggle="modal" data-bs-target="#carritoPopUp">
+          <button type="button" class="btn btn-primary boton" data-bs-toggle="modal" data-bs-target="#carritoPopUp" id ="carrito">
             <span class="texto">Carrito</span>
           </button>
         </div>
         <div class="col d-flex justify-content-center">
-          <button type="button" class="btn btn-primary boton text-center">
+          <button type="button" class="btn btn-primary boton text-center" id="RCompra">
             <span class="texto">Realizar Compra</span>
           </button>
         </div>
@@ -175,67 +111,8 @@
                     <th scope="col">Subtotal</th>
                   </tr>
                 </thead>
-                <tbody>
-                  <tr>
-                    <th>
-                      <button class="navbar-toggler" type="button">
-                        <i class="fas fa-times"></i>
-                      </button>
-                    </th>
-                    <th scope="row">Leche Santa Clara 1 lt</th>
-                    <td>3</td>
-                    <td>$72.00</td>
-                  </tr>
-                  <tr>
-                    <th>
-                      <button class="navbar-toggler" type="button">
-                        <i class="fas fa-times"></i>
-                      </button>
-                    </th>
-                    <th scope="row">Atun Dolores en agua 330gr</th>
-                    <td>2</td>
-                    <td>$60.00</td>
-                  </tr>
-                  <tr>
-                    <th>
-                      <button class="navbar-toggler" type="button">
-                        <i class="fas fa-times"></i>
-                      </button>
-                    </th>
-                    <th scope="row">Queso oaxaca La Villita 500gr</th>
-                    <td>1</td>
-                    <td>$85.00</td>
-                  </tr>
-                  <tr>
-                    <th>
-                      <button class="navbar-toggler" type="button">
-                        <i class="fas fa-times"></i>
-                      </button>
-                    </th>
-                    <th scope="row">Cerveza Stella Artois 255ml six</th>
-                    <td>1</td>
-                    <td>$120.00</td>
-                  </tr>
-                  <tr>
-                    <th>
-                      <button class="navbar-toggler" type="button">
-                        <i class="fas fa-times"></i>
-                      </button>
-                    </th>
-                    <th scope="row">Atun Dolores en agua 330gr</th>
-                    <td>2</td>
-                    <td>$60.00</td>
-                  </tr>
-                  <tr>
-                    <td>
-                      <button class="navbar-toggler" type="button">
-                        <i class="fas fa-times"></i>
-                      </button>
-                    </td>
-                    <th scope="row">Cerveza Stella Artois 255ml six</th>
-                    <td>1</td>
-                    <td>$120.00</td>
-                  </tr>
+                <tbody id="tcarrito" >
+                
                 </tbody>
             </table>
           </div>
@@ -265,7 +142,7 @@
           </div>
         </div>
         <div class="modal-footer d-flex justify-content-center">
-          <button type="button" class="btn btn-primary" onclick="agregarCarrito();">Guardar</button>          
+          <button type="button" class="btn btn-primary" id="agregar">Guardar</button>          
           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
         </div>
       </div>
@@ -305,43 +182,11 @@
   <!-- Termina menu offcanvas -->
 
   <p id="a"></p>
-  <script>
-  var table = document.getElementById('tabla'),rIndex;
-  var seleccion;
-  var cantidad = 0;
-  var carrito = [];
 
-  //Esta funcion la debemos llamar una vez que hayamos creado la tabla
-  function agregarSeleccionTabla()
-  {
-    for(var i=0;i<table.rows.length;i++)
-    {
-      table.rows[i].onclick = function()
-      {
-        rIndex = this.rowIndex;
-        var producto = 
-        {
-          'nombre': this.cells[1].innerHTML,
-          'precio': this.cells[3].innerHTML,
-          'cantidad': 0
-        }
-        console.log(producto);
-        seleccion = producto;
-      }
-    }
-  }
 
-  function agregarCarrito()
-  {
-    cantidad = document.getElementById("cantidadInput").value;
-    console.log(cantidad);
-    seleccion.cantidad = cantidad;
-    carrito.push(seleccion);
-    console.log(carrito); 
-  }
 
-  agregarSeleccionTabla();
-  </script>
+  
+
 </body>
 <script src="scripts/appcompra.js"></script>
 </html>

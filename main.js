@@ -688,6 +688,21 @@ async function searchProducto(producto){
     }
 }
 
+async function buscarProducto(producto){
+    try{
+        const conn = await getConnection();
+        //console.log(producto.nombre);
+        const result = await conn.query('SELECT * FROM Producto WHERE Nombre=?',[producto.nombre])
+        //console.log(result)
+        return result;
+    }
+    catch(error){
+        console.log(error)
+    }
+
+}
+
+
 async function modifyProducto(sw,cpy, producto){
     if(sw === 3){
             try{
@@ -697,7 +712,7 @@ async function modifyProducto(sw,cpy, producto){
                     const id = cpy.ID_Producto;
                     
                
-                    const result2 = await conn.query('UPDATE Producto SET Nombre=?, Precio=?, Stock=?, Descripcion=? WHERE ID_Producto=?',[producto.nombre, producto.precio, producto.stock, producto.descripcion, id])
+                    const result2 = await conn.query('UPDATE Producto SET Nombre=?, Precio=?, Stock=?, Descripcion=? WHERE Nombre=?',[producto.nombre, producto.precio, producto.stock, producto.descripcion, producto.nombre])
                    
                     new Notification({
                         title: 'StockSpot',
@@ -785,6 +800,7 @@ module.exports = {
     createProducto,
     searchProducto,
     modifyProducto,
-    deleteProducto
+    deleteProducto,
+    buscarProducto
 
 };
