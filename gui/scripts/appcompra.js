@@ -16,10 +16,32 @@ const btnRcompra = document.getElementById('RCompra');
 const btnBorrarcompra = document.getElementById('bcompra');
 //variables carrito
 var table = document.getElementById('tabla'),rIndex;
+var tablec = document.getElementById('tablec'),rIndex;
 var seleccion;
+var seleccionc;
 var cantidad = 0;
 var carrito = [];
+var eliminacionCarrito;
 //Funciones carrito
+var auxi;
+var eliminar;
+//Funciones carrito
+function eliminar(elimina)
+{
+  var carritoTemp = [];
+  for(var i=0;i<carrito.length;i++)
+  {
+    if(!(carrito[i].nombre === elimina))
+    {
+      carritoTemp.push(carrito[i]);
+      //console.log("borrados");
+    }
+  }
+  carrito = carritoTemp;
+  renderCarrito();
+}
+
+
 function agregarSeleccionTabla()
 {
     for(var i=0;i<table.rows.length;i++)
@@ -39,9 +61,34 @@ function agregarSeleccionTabla()
     }
 }
 
-
+function agregarSeleccionTablaCarrito()
+{
+    //console.log(tablec);
+    for(var i=0;i<tablec.rows.length;i++)
+    {
+      //console.log("esto en seleccion tablec");
+      tablec.rows[i].onclick = function()
+      {
+        rIndex = this.rowIndex;
+        var producto = 
+        {
+          'nombre': this.cells[1].innerHTML,
+          'precio': this.cells[3].innerHTML,
+          'cantidad': this.cells[2].innerHTML
+        }
+        console.log(producto);
+        seleccionc = producto.nombre;
+        eliminar(seleccionc);
+      }
+    }
+}
 //MOstrar carrito
 btnCarrito.onclick = function (){
+    renderCarrito();
+
+};
+
+function renderCarrito(){
     sumaList.innerHTML= '';
     carritoList.innerHTML= '';
     suma = 0.00;
@@ -67,8 +114,10 @@ btnCarrito.onclick = function (){
         sumaList.innerHTML += `
         <span class="texto" >Total: $ ${suma.toFixed(2)}</span>
     `
+    agregarSeleccionTablaCarrito();
 
-};
+}
+
 
 btnRcompra.onclick = async () =>{
     

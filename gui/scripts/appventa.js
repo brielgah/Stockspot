@@ -16,13 +16,36 @@ const btnRVenta = document.getElementById('RVenta');
 //variables carrito
 //variables carrito
 var table = document.getElementById('tabla'),rIndex;
+var tablec = document.getElementById('tablec'),rIndex;
 var seleccion;
+var seleccionc;
 var cantidad = 0;
 var carrito = [];
+var eliminacionCarrito;
 //Funciones carrito
+var auxi;
+var eliminar;
+
+function eliminar(elimina)
+{
+  var carritoTemp = [];
+  for(var i=0;i<carrito.length;i++)
+  {
+    if(!(carrito[i].nombre === elimina))
+    {
+      carritoTemp.push(carrito[i]);
+    }
+  }
+  carrito = carritoTemp;
+  renderCarrito();
+}
+
+
+
+
 function agregarSeleccionTabla()
 {
-    console.log(table);
+    //console.log(table);
     for(var i=0;i<table.rows.length;i++)
     {
       
@@ -35,22 +58,48 @@ function agregarSeleccionTabla()
           'precio': this.cells[3].innerHTML,
           'cantidad': this.cells[2].innerHTML
         }
-        console.log(producto);
+        //console.log(producto);
         seleccion = producto;
       }
     }
 }
 
 
+function agregarSeleccionTablaCarrito()
+{
+    //console.log(tablec);
+    for(var i=0;i<tablec.rows.length;i++)
+    {
+      
+      tablec.rows[i].onclick = function()
+      {
+        rIndex = this.rowIndex;
+        var producto = 
+        {
+          'nombre': this.cells[1].innerHTML,
+          'precio': this.cells[3].innerHTML,
+          'cantidad': this.cells[2].innerHTML
+        }
+        console.log(producto);
+        seleccionc = producto.nombre;
+        eliminar(seleccionc);
+      }
+    }
+}
+
 //MOstrar carrito
 btnCarrito.onclick = function (){
+    renderCarrito();
+};
+
+function renderCarrito(){
     ventitac.innerHTML= '';
     carritoList.innerHTML= '';
     suma = 0.00
     for(var i=0;i<carrito.length;i++)
     {
         suma = suma + (parseFloat(carrito[i].precio)*parseFloat(carrito[i].cantidad));
-        console.log(carrito.nombre)
+        console.log(carrito)
         carritoList.innerHTML += `
                   <tr>
                     <th>
@@ -68,7 +117,10 @@ btnCarrito.onclick = function (){
     ventitac.innerHTML += `
         <span class="texto" >Total: $ ${suma.toFixed(2)}</span>
     `
-};
+    agregarSeleccionTablaCarrito();
+
+
+}
 
 btnRVenta.onclick = async () =>{
     
@@ -95,7 +147,7 @@ btnRVenta.onclick = async () =>{
         let year = date_ob.getFullYear();
         let fecha = year + "-" + month + "-" + date;
         let monto = await main.buscarMontoVenta(fecha);
-        console.log(monto);
+        //console.log(monto);
         monto = parseFloat(monto[0].Monto)+suma;
         await main.modifyMontoVenta(fecha, monto.toFixed(2)) 
     }
@@ -105,10 +157,10 @@ btnRVenta.onclick = async () =>{
 
 btnAgregar.onclick = function (){
     cantidad = document.getElementById("cantidadInput").value;
-    console.log(seleccion);
+    //console.log(seleccion);
     cantidad = parseInt(cantidad);
-    console.log(seleccion.cantidad);
-    console.log(cantidad);
+    //console.log(seleccion.cantidad);
+    //console.log(cantidad);
     seleccion.cantidad = parseInt(seleccion.cantidad);
     if(seleccion.cantidad < cantidad || seleccion.cantidad ==  0 || seleccion.cantidad -cantidad < 0){
         console.log("xd");
@@ -116,7 +168,7 @@ btnAgregar.onclick = function (){
     else{
             seleccion.cantidad =cantidad;
             carrito.push(seleccion);
-            console.log(carrito); 
+            //console.log(carrito); 
 
     }
 
@@ -145,7 +197,7 @@ function renderProducts(products){
 
 const getProveedores = async () =>{
     proveedores = await main.getProveedores();
-    console.log(proveedores);
+    //console.log(proveedores);
     renderProveedores(proveedores);
 }
 
