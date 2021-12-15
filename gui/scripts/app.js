@@ -141,7 +141,7 @@ function filtrar() {
       var input, filter, table, tr, td, i, txtValue;
       input = document.getElementById("busquedaInput");
       filter = input.value.toUpperCase();
-      table = document.getElementById("productosc");
+      table = document.getElementById("productos");
       tr = table.getElementsByTagName("tr");
       console.log(tr);
       for (i = 0; i < tr.length; i++) {
