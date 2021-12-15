@@ -117,7 +117,7 @@ function renderProducts(products){
                       <i class="fas fa-plus"></i>
                     </button>
                   </th>
-                  <th scope="row">${element.Nombre}</th>
+                  <td scope="row">${element.Nombre}</td>
                   <td>${element.Stock}</td>
                   <td>${element.Precio}</td>
                   
@@ -183,5 +183,28 @@ async function init(){
     agregarSeleccionTabla();
    // await getCantidad();
 }
+
+function filtrar() {
+  // Declare variables
+    var input, filter, table, tr, td, i, txtValue;
+    input = document.getElementById("busquedaInput");
+    filter = input.value.toUpperCase();
+    table = document.getElementById("productosc");
+    tr = table.getElementsByTagName("tr");
+    console.log(tr);
+    for (i = 0; i < tr.length; i++) {
+        console.log(tr)
+        td = tr[i].getElementsByTagName("td")[0];
+        console.log(td);
+        if (td) {
+            txtValue = td.textContent || td.innerText;
+            if (txtValue.toUpperCase().indexOf(filter) > -1) {
+            tr[i].style.display = "";
+            } else {
+            tr[i].style.display = "none";
+            }
+        }
+    }
+  }
 
 init();

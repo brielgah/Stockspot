@@ -39,7 +39,7 @@
   <div class="container d-flex">
     <div class="container-fluid align-self-center" id="table">
       <div class="row">
-  
+        <input class="form-control mb-4" id="busquedaInput" onkeyup="filtrar()" type="text" placeholder="Ingresa el nombre del producto">
       </div>
       <div class="row">
        <div class="table-responsive-sm table-wrapper">
@@ -52,14 +52,14 @@
                   <th scope="col">Subtotal</th>
                 </tr>
               </thead>
-              <tbody>
+              <tbody id="busqueda">
                 <tr>
                   <th>
                     <button class="navbar-toggler" type="button">
                       <i class="fas fa-plus"></i>
                     </button>
                   </th>
-                  <th scope="row">Leche Santa Clara 1 lt</th>
+                  <td scope="row">Leche Santa Clara 1 lt</td>
                   <td>3</td>
                   <td>$72.00</td>
                 </tr>
@@ -69,7 +69,7 @@
                       <i class="fas fa-plus"></i>
                     </button>
                   </th>
-                  <th scope="row">Atun Dolores en agua 330gr</th>
+                  <td scope="row">Atun Dolores en agua 330gr</td>
                   <td>2</td>
                   <td>$60.00</td>
                 </tr>
@@ -79,7 +79,7 @@
                       <i class="fas fa-plus"></i>
                     </button>
                   </th>
-                  <th scope="row">Queso oaxaca La Villita 500gr</th>
+                  <td scope="row">Queso oaxaca La Villita 500gr</td>
                   <td>1</td>
                   <td>$85.00</td>
                 </tr>
@@ -89,7 +89,7 @@
                       <i class="fas fa-plus"></i>
                     </button>
                   </th>
-                  <th scope="row">Cerveza Stella Artois 255ml six</th>
+                  <td scope="row">Cerveza Stella Artois 255ml six</td>
                   <td>1</td>
                   <td>$120.00</td>
                 </tr>
@@ -99,7 +99,7 @@
                       <i class="fas fa-plus"></i>
                     </button>
                   </th>
-                  <th scope="row">Atun Dolores en agua 330gr</th>
+                  <td scope="row">Atun Dolores en agua 330gr</td>
                   <td>2</td>
                   <td>$60.00</td>
                 </tr>
@@ -109,7 +109,7 @@
                       <i class="fas fa-plus"></i>
                     </button>
                   </th>
-                  <th scope="row">Cerveza Stella Artois 255ml six</th>
+                  <td scope="row">Cerveza Stella Artois 255ml six</td>
                   <td>1</td>
                   <td>$120.00</td>
                 </tr>
@@ -226,6 +226,31 @@
     </div>
   </div>
   <!-- Termina menu offcanvas -->
+
+  <script>
+  function filtrar() {
+  // Declare variables
+    var input, filter, table, tr, td, i, txtValue;
+    input = document.getElementById("busquedaInput");
+    filter = input.value.toUpperCase();
+    table = document.getElementById("busqueda");
+    tr = table.getElementsByTagName("tr");
+    console.log(tr);
+    for (i = 0; i < tr.length; i++) {
+        console.log(tr)
+        td = tr[i].getElementsByTagName("td")[0];
+        console.log(td);
+        if (td) {
+            txtValue = td.textContent || td.innerText;
+            if (txtValue.toUpperCase().indexOf(filter) > -1) {
+            tr[i].style.display = "";
+            } else {
+            tr[i].style.display = "none";
+            }
+        }
+    }
+  }
+  </script>
 </body>
 
 </html>
