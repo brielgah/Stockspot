@@ -12,6 +12,12 @@ body
     /* background-color: rgb(37, 169, 173); */
 }
 
+.navbar
+{
+    background-color: #FFEEDD;
+}
+
+
 .logo
 {
     max-width: 100%;

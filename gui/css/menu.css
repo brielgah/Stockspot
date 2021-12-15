@@ -8,14 +8,24 @@ html{
     margin: 0;
 }
 
+.navbar
+{
+    background-color: #FFEEDD;
+}
+
 h1{
     word-wrap: break-word;
 }
 
-.rounded
+.fondo
 {
-    background-color: #fad9bf;
-    border-radius: 25px;
+    background-color: #fff;
+}
+
+.bordecir
+{
+    background-color: #F9F7F0;
+    border-radius: 45px;
 }
 
 .max-alto
