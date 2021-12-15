@@ -43,7 +43,7 @@
       </div>
       <div class="row">
        <div class="table-responsive-sm table-wrapper">
-          <table class="table table-striped table-hover">
+          <table class="table table-striped table-hover" id="tabla">
               <thead>
                 <tr>    
                   <th scope="col"></th>
@@ -52,74 +52,14 @@
                   <th scope="col">Subtotal</th>
                 </tr>
               </thead>
-              <tbody id="busqueda">
-                <tr>
-                  <th>
-                    <button class="navbar-toggler" type="button">
-                      <i class="fas fa-plus"></i>
-                    </button>
-                  </th>
-                  <td scope="row">Leche Santa Clara 1 lt</td>
-                  <td>3</td>
-                  <td>$72.00</td>
-                </tr>
-                <tr>
-                  <th>
-                    <button class="navbar-toggler" type="button">
-                      <i class="fas fa-plus"></i>
-                    </button>
-                  </th>
-                  <td scope="row">Atun Dolores en agua 330gr</td>
-                  <td>2</td>
-                  <td>$60.00</td>
-                </tr>
-                <tr>
-                  <th>
-                    <button class="navbar-toggler" type="button">
-                      <i class="fas fa-plus"></i>
-                    </button>
-                  </th>
-                  <td scope="row">Queso oaxaca La Villita 500gr</td>
-                  <td>1</td>
-                  <td>$85.00</td>
-                </tr>
-                <tr>
-                  <th>
-                    <button class="navbar-toggler" type="button">
-                      <i class="fas fa-plus"></i>
-                    </button>
-                  </th>
-                  <td scope="row">Cerveza Stella Artois 255ml six</td>
-                  <td>1</td>
-                  <td>$120.00</td>
-                </tr>
-                <tr>
-                  <th>
-                    <button class="navbar-toggler" type="button" data-bs-toggle="modal" data-bs-target="#cantidadPopUp">
-                      <i class="fas fa-plus"></i>
-                    </button>
-                  </th>
-                  <td scope="row">Atun Dolores en agua 330gr</td>
-                  <td>2</td>
-                  <td>$60.00</td>
-                </tr>
-                <tr>
-                  <th>
-                    <button class="navbar-toggler" type="button">
-                      <i class="fas fa-plus"></i>
-                    </button>
-                  </th>
-                  <td scope="row">Cerveza Stella Artois 255ml six</td>
-                  <td>1</td>
-                  <td>$120.00</td>
-                </tr>
-              </tbody>
+              <tbody id="productosv">
+               
           </table>
         </div>
       </div>
       <div class="row d-flex justify-content-center mt-2">
           <div class="col d-flex justify-content-end">
-            <span class="texto">Total: $517.00</span>
+            
           </div>
       </div>
       <div class="row justify-content-between gap-2 mt-4">
@@ -129,7 +69,7 @@
           </button>
         </div>
         <div class="col d-flex justify-content-center mt-2">
-          <button type="button" class="btn btn-primary boton ">
+          <button type="button" class="btn btn-primary boton " id="RVenta">
             <span class="texto">Realizar Venta</span>
           </button>
         </div>
@@ -161,6 +101,9 @@
                   
                   </tbody>
               </table>
+              <div id ="ventitac">
+                
+              </div>
             </div>
           </div>
           <div class="modal-footer d-flex justify-content-center">
@@ -252,5 +195,5 @@
   }
   </script>
 </body>
-
+<script src="scripts/appventa.js"></script>
 </html>

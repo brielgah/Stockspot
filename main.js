@@ -51,6 +51,7 @@ function createWindow(){
         }
     })
     window.loadFile('./gui/index.html');
+
 }
 
 function createWindowInv(){
@@ -130,7 +131,24 @@ function createWindowProv(){
     window.loadFile('./proveedores/menu.html');
 }
 
-
+function createWindowDoom(){
+    window = new BrowserWindow({
+        width: 1000,
+        height: 700,
+        center: true,
+        backgroundColor: '#000', 
+        title: 'Inventario', 
+        resizable: true,
+        maximizable: false,
+        //autoHideMenuBar: true,
+        transparent: true,
+        movable: true,
+        webPreferences:{
+        nodeIntegration: true
+        }
+    })
+    window.loadFile('./gui/doom.html');
+}
 
 app.on('activate', () => {
 if (BrowserWindow.getAllWindows().length === 0) {
@@ -702,6 +720,78 @@ async function buscarProducto(producto){
 
 }
 
+async function createFechaVenta(fecha){
+    try{
+        const conn = await getConnection();
+        const result = await conn.query('INSERT INTO Venta (ID_Empleado, Monto, Fecha)  values (?,?,?)',
+                            ["2", "0.00",fecha]);
+        console.log(result)
+        
+        new Notification({
+            title: 'StockSpot',
+            body: '✔ Nuevo registro de ventas creado!   ID:'+result.insertId,
+            subtitle: 'Se mostrara en la bd',
+            timeoutType: 'default'
+        }).show();
+
+    }catch(error){
+        new Notification({
+            title: 'StockSpot',
+            body: '❌ Error'+'\n'+ error,
+            subtitle: 'Verificar en bd',
+            timeoutType: 'default'
+        }).show();
+        console.log(error)
+    }    
+}
+
+
+
+
+async function buscarFechaVenta(fecha){
+    try{
+        const conn = await getConnection();
+        //console.log(producto.nombre);
+        const result = await conn.query('SELECT * FROM Venta WHERE Fecha = ?',[fecha])
+        //console.log(result)
+        return result;
+    }
+    catch(error){
+        console.log(error)
+    }
+
+}
+
+async function buscarMontoVenta(fecha){
+    try{
+        const conn = await getConnection();
+        //console.log(producto.nombre);
+        const result = await conn.query('SELECT * FROM Venta WHERE Fecha = ?',[fecha])
+        //console.log(result)
+        return result;
+    }
+    catch(error){
+        console.log(error)
+    }
+
+}
+
+async function modifyMontoVenta(fecha, monto){
+      try{
+        const conn = await getConnection();
+        //console.log(producto.nombre);
+        await conn.query('UPDATE Venta SET Monto = ? WHERE Venta.Fecha = ?',[monto,fecha])
+        //console.log(result)
+        
+    }
+    catch(error){
+        console.log(error)
+    }
+}
+
+
+
+
 
 async function modifyProducto(sw,cpy, producto){
     if(sw === 3){
@@ -801,6 +891,9 @@ module.exports = {
     searchProducto,
     modifyProducto,
     deleteProducto,
-    buscarProducto
-
+    buscarProducto,
+    buscarFechaVenta,
+    createFechaVenta,
+    buscarMontoVenta,
+    modifyMontoVenta
 };

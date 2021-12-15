@@ -4,16 +4,16 @@ const main = remote.require('./main')
 
 let proveedores = [];
 let products = [];
-let suma = 0.00;
 let editingStatus = false;
 let editiserId = '';
-const productList = document.getElementById('productosc');
-const sumaList = document.getElementById('sumita');
+let suma = 0.00;
+const ventitacList = document.getElementById('ventitac');
+const productList = document.getElementById('productosv');
 const carritoList = document.getElementById('tcarrito');
 const btnAgregar = document.getElementById('agregar');
 const btnCarrito = document.getElementById('carrito');
-const btnRcompra = document.getElementById('RCompra');
-const btnBorrarcompra = document.getElementById('bcompra');
+const btnRVenta = document.getElementById('RVenta');
+//variables carrito
 //variables carrito
 var table = document.getElementById('tabla'),rIndex;
 var seleccion;
@@ -22,8 +22,10 @@ var carrito = [];
 //Funciones carrito
 function agregarSeleccionTabla()
 {
+    console.log(table);
     for(var i=0;i<table.rows.length;i++)
     {
+      
       table.rows[i].onclick = function()
       {
         rIndex = this.rowIndex;
@@ -31,9 +33,9 @@ function agregarSeleccionTabla()
         {
           'nombre': this.cells[1].innerHTML,
           'precio': this.cells[3].innerHTML,
-          'cantidad': 0
+          'cantidad': this.cells[2].innerHTML
         }
-        //console.log(producto);
+        console.log(producto);
         seleccion = producto;
       }
     }
@@ -42,18 +44,17 @@ function agregarSeleccionTabla()
 
 //MOstrar carrito
 btnCarrito.onclick = function (){
-    sumaList.innerHTML= '';
+    ventitac.innerHTML= '';
     carritoList.innerHTML= '';
-    suma = 0.00;
-    console.log(carrito)
+    suma = 0.00
     for(var i=0;i<carrito.length;i++)
     {
         suma = suma + (parseFloat(carrito[i].precio)*parseFloat(carrito[i].cantidad));
-        //console.log(carrito.nombre)
+        console.log(carrito.nombre)
         carritoList.innerHTML += `
                   <tr>
                     <th>
-                      <button class="navbar-toggler" type="button" id="bcompra">
+                      <button class="navbar-toggler" type="button">
                         <i class="fas fa-times"></i>
                       </button>
                     </th>
@@ -64,13 +65,12 @@ btnCarrito.onclick = function (){
     `
       
     }
-        sumaList.innerHTML += `
+    ventitac.innerHTML += `
         <span class="texto" >Total: $ ${suma.toFixed(2)}</span>
     `
-
 };
 
-btnRcompra.onclick = async () =>{
+btnRVenta.onclick = async () =>{
     
     for(var i=0;i<carrito.length;i++)
     {
@@ -82,34 +82,50 @@ btnRcompra.onclick = async () =>{
         //console.log("Se encontro en la query a");
         //console.log(aux);
         aux = {id:aux[0].ID_Producto,nombre:aux[0].Nombre,stock:aux[0].Stock,precio:aux[0].Precio,descripcion:aux[0].Descripcion}
-        //sumamos el stock que compramos al que ya tenemos
-        aux2 = parseInt(aux.stock)+parseInt(carrito[i].cantidad);
+    
         //console.log(aux2);
-        aux.stock = aux2;
+        aux.stock = parseInt(carrito[i].cantidad);
         await main.modifyProducto(sw, aux, aux);
         sw = 0; 
-        init();
-      
+        //modificar montos de venta
+        let ts = Date.now();
+        let date_ob = new Date(ts);
+        let date = date_ob.getDate();
+        let month = date_ob.getMonth() + 1;
+        let year = date_ob.getFullYear();
+        let fecha = year + "-" + month + "-" + date;
+        let monto = await main.buscarMontoVenta(fecha);
+        console.log(monto);
+        monto = parseFloat(monto[0].Monto)+suma;
+        await main.modifyMontoVenta(fecha, monto.toFixed(2)) 
     }
 
 
 };
 
-
-
 btnAgregar.onclick = function (){
     cantidad = document.getElementById("cantidadInput").value;
+    console.log(seleccion);
+    cantidad = parseInt(cantidad);
+    console.log(seleccion.cantidad);
     console.log(cantidad);
-    seleccion.cantidad = cantidad;
-    carrito.push(seleccion);
-    console.log(carrito); 
+    seleccion.cantidad = parseInt(seleccion.cantidad);
+    if(seleccion.cantidad < cantidad || seleccion.cantidad ==  0 || seleccion.cantidad -cantidad < 0){
+        console.log("xd");
+    }
+    else{
+            seleccion.cantidad =cantidad;
+            carrito.push(seleccion);
+            console.log(carrito); 
+
+    }
+
     
 };
 
 
 function renderProducts(products){
     productList.innerHTML= '';
-
     products.forEach(element => {
         productList.innerHTML += `
                 <tr>
@@ -125,10 +141,13 @@ function renderProducts(products){
                 </tr>
     `
     });
-
 }
 
-
+const getProveedores = async () =>{
+    proveedores = await main.getProveedores();
+    console.log(proveedores);
+    renderProveedores(proveedores);
+}
 
 const searchProducto = async()=>{
     sw = 3;
@@ -177,7 +196,9 @@ const getProducts = async () =>{
 }
 async function init(){
     await getProducts();
+    //console.log(table);
     agregarSeleccionTabla();
+    
    // await getCantidad();
 }
 
