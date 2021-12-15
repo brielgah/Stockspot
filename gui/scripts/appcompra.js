@@ -151,7 +151,11 @@ btnAgregar.onclick = function (){
     console.log(cantidad);
     seleccion.cantidad = cantidad;
     carrito.push(seleccion);
-    console.log(carrito); 
+    swal({
+      icon: "success",
+       title: "Se agrego correctamente el producto al carrito"
+    });
+    //console.log(carrito); 
     
 };
 

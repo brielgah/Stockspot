@@ -164,10 +164,18 @@ btnAgregar.onclick = function (){
     seleccion.cantidad = parseInt(seleccion.cantidad);
     if(seleccion.cantidad < cantidad || seleccion.cantidad ==  0 || seleccion.cantidad -cantidad < 0){
         console.log("xd");
-    }
+        swal({
+               icon: "error",
+                title: "No se tiene esa cantidad de stock"
+                });
+      }
     else{
             seleccion.cantidad =cantidad;
             carrito.push(seleccion);
+            swal({
+              icon: "success",
+              title: "Se agrego correctamente el producto al carrito"
+            });
             //console.log(carrito); 
 
     }
